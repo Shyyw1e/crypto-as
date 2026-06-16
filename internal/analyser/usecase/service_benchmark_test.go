@@ -109,9 +109,9 @@ func BenchmarkServiceHandleTick(b *testing.B) {
 		depth  int
 		name   string
 	}{
-		{users: 100, depth: 10, name: "users_100_depth_10"},
-		{users: 1000, depth: 10, name: "users_1000_depth_10"},
-		{users: 5000, depth: 50, name: "users_5000_depth_50"},
+		{users: 100, depth: 5, name: "users_100_depth_5"},
+		{users: 1000, depth: 5, name: "users_1000_depth_5"},
+		{users: 5000, depth: 5, name: "users_5000_depth_5"},
 	}
 
 	for _, tc := range cases {

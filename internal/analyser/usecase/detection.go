@@ -26,12 +26,12 @@ func DetectFact(
 	effectiveAsk := ask.Price / (1 + feeAsk)
 	effectiveBid := bid.Price * (1 + feeBid)
 	profit := round2(effectiveAsk - effectiveBid)
-	if profit <= 0.01 {	// По умолчанию ищем ситуации не меньше 0.03 diff
+	if profit <= 0.03 {	// По умолчанию ищем ситуации не меньше 0.03 diff
 		return nil
 	}
 	
 	// Объем, который реально можно исполнить на top-1 в обеих книгах
-	tradeAmount := min(ask.Amount, bid.Amount)
+	tradeAmount := max(ask.Amount, bid.Amount)
 	if tradeAmount <= 0 {
 		return nil
 	}
@@ -92,7 +92,7 @@ func DetectPotentialByBids(
 			continue
 		}
 
-		buyAmount := min(ask.Notional, bid.Notional)
+		buyAmount := max(ask.Notional, bid.Notional)
 
 		candidate := &domain.Opportunity{
 			Type:         domain.Potential,
@@ -150,7 +150,7 @@ func DetectPotentialByAsks(
 			continue
 		}
 
-		buyAmount := min(ask.Notional, bid.Notional)
+		buyAmount := max(ask.Notional, bid.Notional)
 
 		candidate := &domain.Opportunity{
 			Type:         domain.Potential,
